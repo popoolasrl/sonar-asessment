@@ -361,21 +361,84 @@ variable "database_snapshot" {
 variable "bucket_name" {
   description = "The name of the S3 bucket"
   type        = string
+  default = "s3-test-sonar-0072145888"
 }
 
 variable "acl" {
   description = "The canned ACL to apply to the S3 bucket"
   type        = string
+  default = "private"
 }
 
 variable "versioning" {
   description = "Enable versioning for the S3 bucket"
   type        = bool
+  default = true
 }
 
 variable "force_destroy" {
   description = "A boolean that indicates all objects (including all versions) should be deleted from the bucket so that the bucket can be destroyed without error"
   type        = bool
+  default = true
 }
 
 
+
+//////////////////////////////////////////////
+///// ECS /////////////////////////////
+
+
+# Declare other variables used in the module "ecs" block
+variable "ecs_cluster_name" {
+  description = "The name of the ECS cluster"
+  type        = string
+  default = "sonar-ecs-cluster"
+}
+
+variable "ecs_instance_type" {
+  description = "The EC2 instance type for ECS"
+  type        = string
+  default = "t3.medium"
+}
+
+variable "ecs_desired_count" {
+  description = "The desired number of tasks to run on the ECS service"
+  type        = number
+  default = 2
+}
+
+variable "ecs_max_capacity" {
+  description = "The maximum number of tasks to run on the ECS service"
+  type        = number
+  default = 4
+}
+
+variable "ecs_min_capacity" {
+  description = "The minimum number of tasks to run on the ECS service"
+  type        = number
+  default = 1
+}
+
+variable "ecs_container_port" {
+  description = "The port on which the ECS container listens"
+  type        = number
+  default = 80
+}
+
+variable "ecs_task_definition" {
+  description = "The ARN of the ECS task definition"
+  type        = string
+  default = "sonar-ecs-task-definition-arn"
+}
+
+variable "ecs_service_name" {
+  description = "The name of the ECS service"
+  type        = string
+  default = "sonar-ecs-service"
+}
+
+variable "ecs_launch_type" {
+  description = "The launch type on which to run your task (EC2 or FARGATE)"
+  type        = string
+  default = "EC2"
+}

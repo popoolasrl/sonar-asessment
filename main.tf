@@ -85,10 +85,28 @@ module "backup" {
 
 
 module "s3" {
-  source          = "./modules/s3"
-  bucket_name     = "my-unique-bucket-name"  
-  acl             = "private"  
-  versioning      = true
-  force_destroy   = true
-  
+  source        = "./modules/s3"
+  bucket_name   = "my-unique-bucket-name"
+  acl           = "private"
+  versioning    = true
+  force_destroy = true
+
 }
+
+module "ecs" {
+  source              = "./modules/ecs"
+  project_name        = var.project_name
+  private_subnet      = var.private_subnet
+  environment         = var.environment
+  app_security_group  = module.vpc.app_security_group
+  ecs_cluster_name    = var.ecs_cluster_name
+  ecs_instance_type   = var.ecs_instance_type
+  ecs_desired_count   = var.ecs_desired_count
+  ecs_max_capacity    = var.ecs_max_capacity
+  ecs_min_capacity    = var.ecs_min_capacity
+  ecs_container_port  = var.ecs_container_port
+  ecs_task_definition = var.ecs_task_definition
+  ecs_service_name    = var.ecs_service_name
+  ecs_launch_type     = var.ecs_launch_type
+}
+

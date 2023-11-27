@@ -118,6 +118,14 @@ db_subnet_group_name = [
   "db-subnet-group"
 ]
 
+private_subnet_group_name = [
+  "private-subnet-group"
+]
+
+public_subnet_group_name = [
+  "public-subnet-group"
+]
+
 alb_security_group_name = [
   "alb-app-security-group"
 ]

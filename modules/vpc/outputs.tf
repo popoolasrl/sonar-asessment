@@ -27,3 +27,21 @@ output "db_security_group" {
   description = "Database Security Group"
   value = aws_security_group.db_security_group.id
 }
+
+output "private_subnets" {
+  description = "List of private subnet IDs"
+  # value       = aws_subnet.private_subnet[*].id
+  value       = [for subnet in aws_subnet.private_subnet : subnet.id]
+}
+
+output "public_subnets" {
+  description = "List of public subnet IDs"
+  # value       = values(aws_subnet.public_subnet[*].id)
+  value       = [for subnet in aws_subnet.public_subnet : subnet.id]
+}
+
+output "database_subnets" {
+  description = "List of database subnet IDs"
+  # value       = values(aws_subnet.database_subnet[*].id)
+  value       = [for subnet in aws_subnet.database_subnet : subnet.id]
+}
